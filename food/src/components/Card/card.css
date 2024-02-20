@@ -1,0 +1,37 @@
+.card-box {
+    width: 100%;
+    padding: 20px;
+
+    .card {
+        width: 18%;
+        padding: 10px;
+
+        img {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .title {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px;
+
+            .rating {
+                background-color: green;
+                color: white;
+                padding: 0 5px;
+                border-radius: 5px;
+            }
+        }
+    }
+
+}
+
+.card-box :hover {
+    background-color: black;
+    border-radius: 20px;
+
+    .title {
+        color: white;
+    }
+}
