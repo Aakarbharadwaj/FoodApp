@@ -14,9 +14,9 @@ const Card = (props) => {
     return (
         <div className='card-box'>
             {
-                props.item.map((value) => (
+                props.item.map((value, i) => (
 
-                    <div className='card'>
+                    <div className='card' key={i}>
                         <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + value.info.cloudinaryImageId}></img>
                         <h3 className='brand'>{value.info.name}</h3>
                         <div className='title'>

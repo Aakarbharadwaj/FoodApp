@@ -1,0 +1,12 @@
+.search {
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+
+    input {
+        border-color: orangered;
+        outline: none;
+        border-radius: 20px;
+        padding: 5px 20px 5px 0;
+    }
+}
