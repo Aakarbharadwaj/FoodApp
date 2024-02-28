@@ -9,6 +9,7 @@ const Search = () => {
                 <input type='text' placeholder='Enter food item' value={item} onChange={(e) => { setItem(e.target.value) }} />
                 <button>Search</button>
             </div>
+            
         </>
     )
 }

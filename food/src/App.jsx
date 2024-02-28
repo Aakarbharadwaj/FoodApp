@@ -2,10 +2,9 @@ import { useState } from 'react'
 import Header from './components/Header/Header'
 import Card from './components/Card/Card'
 import './App.css'
-import Items from './components/Card/Items'
+import Items from './utils/Items'
 import Search from './components/Search/Search'
 function App() {
-
 
   return (
     <>
@@ -14,6 +13,7 @@ function App() {
       <Card item={Items} />
     </>
   )
+
 }
 
 export default App
