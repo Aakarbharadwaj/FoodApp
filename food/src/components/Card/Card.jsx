@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Card.css'
 
 
@@ -12,9 +12,19 @@ import './Card.css'
 
 
 const Card = (props) => {
-    const [top, setTop] = useState(props.item)
+    const [top, setTop] = useState([])
     const clicked = () => (
-        setTop(top.filter((item) => item.info.avgRatingString > 4)))
+        setTop(top.filter((item) => item.info.avgRatingString > 4.5)))
+
+    useEffect(
+        () => {
+            const handleTop = async () => {
+                const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.95250&lng=75.71050&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING');
+                const json = await data.json();
+                setTop(json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
+            }
+            handleTop();
+        }, [])
     return (
         <>
 

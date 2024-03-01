@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Header />
-      <Search />
+      <Search new={Items}/>
       <Card item={Items} />
     </>
   )
