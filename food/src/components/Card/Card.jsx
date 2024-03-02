@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Card.css'
-
+// import Search from '../Search/Search'
+import Search from './../Search/Search';
 
 
 // const Items = {
@@ -13,8 +14,20 @@ import './Card.css'
 
 const Card = (props) => {
     const [top, setTop] = useState([])
+    const [item, setItem] = useState("");
+    const [value, setValue] = useState("");
+
     const clicked = () => (
-        setTop(top.filter((item) => item.info.avgRatingString > 4.5)))
+        setTop(top.filter((item) => item.info.avgRatingString > 4.3)))
+
+
+    const handleSearch = () => {
+        setValue(item);
+        setItem("");
+        setTop(top.filter((food) => food.info.name === value));
+        console.log(value);
+    }
+
 
     useEffect(
         () => {
@@ -27,23 +40,28 @@ const Card = (props) => {
         }, [])
     return (
         <>
-
+            <div className='search'>
+                <input type='text' placeholder='Enter food item' value={item} onChange={(e) => { setItem(e.target.value) }} />
+                <button onClick={handleSearch}>Search</button>
+            </div>
             <button className='top' style={{ marginLeft: "48%" }} onClick
-                ={clicked}>Top Rated</button>
+                ={clicked}>Top Rated Restaurants</button>
             <div className='card-box'>
                 {
-                    top.map((value, i) => (
+                    top ?
+                        top.map((value, i) => (
 
-                        <div className='card' key={i}>
-                            <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + value.info.cloudinaryImageId}></img>
-                            <h3 className='brand'>{value.info.name}</h3>
-                            <div className='title'>
-                                <h3>{value.info.costForTwo}</h3>
-                                <h3 className='rating'>{value.info.avgRatingString}</h3>
+                            <div className='card' key={i}>
+                                <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + value.info.cloudinaryImageId}></img>
+                                <h3 className='brand'>{value.info.name}</h3>
+                                <p className='time' style={{ color: 'grey' }}>Delivery Time : {value.info.sla.deliveryTime} min.</p>
+                                <div className='title'>
+                                    <h3>{value.info.costForTwo}</h3>
+                                    <h3 className='rating'>{value.info.avgRatingString}</h3>
+                                </div>
+
                             </div>
-
-                        </div>
-                    ))
+                        )) : <p>No such Restaurant found</p>
                 }
             </div>
         </>
