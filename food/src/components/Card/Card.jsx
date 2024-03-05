@@ -15,17 +15,20 @@ import Search from './../Search/Search';
 const Card = (props) => {
     const [top, setTop] = useState([])
     const [item, setItem] = useState("");
-    const [value, setValue] = useState("");
+    // const [value, setValue] = useState("");
 
     const clicked = () => (
         setTop(top.filter((item) => item.info.avgRatingString > 4.3)))
 
 
     const handleSearch = () => {
-        setValue(item);
+
+        // console.log(item);
+        // setValue(item);
+        // console.log(value);
+        setTop(top.filter((food) => food.info.name.toLocaleLowerCase().includes(item.toLocaleLowerCase())));
         setItem("");
-        setTop(top.filter((food) => food.info.name === value));
-        console.log(value);
+        console.log(top);
     }
 
 
@@ -33,8 +36,8 @@ const Card = (props) => {
         () => {
             const handleTop = async () => {
                 const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.95250&lng=75.71050&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING');
-                const json = await data.json();
-                setTop(json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
+                const response = await data.json();
+                setTop(response?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
             }
             handleTop();
         }, [])
@@ -44,8 +47,12 @@ const Card = (props) => {
                 <input type='text' placeholder='Enter food item' value={item} onChange={(e) => { setItem(e.target.value) }} />
                 <button onClick={handleSearch}>Search</button>
             </div>
+
+
             <button className='top' style={{ marginLeft: "48%" }} onClick
                 ={clicked}>Top Rated Restaurants</button>
+
+
             <div className='card-box'>
                 {
                     top ?
