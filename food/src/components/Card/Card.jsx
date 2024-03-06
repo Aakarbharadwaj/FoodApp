@@ -15,10 +15,10 @@ import Search from './../Search/Search';
 const Card = (props) => {
     const [top, setTop] = useState([])
     const [item, setItem] = useState("");
-    // const [value, setValue] = useState("");
+    const [filteredValue, setFilteredValue] = useState([]);
 
     const clicked = () => (
-        setTop(top.filter((item) => item.info.avgRatingString > 4.3)))
+        setFilteredValue(top.filter((item) => item.info.avgRatingString > 4.3)))
 
 
     const handleSearch = () => {
@@ -26,9 +26,11 @@ const Card = (props) => {
         // console.log(item);
         // setValue(item);
         // console.log(value);
-        setTop(top.filter((food) => food.info.name.toLocaleLowerCase().includes(item.toLocaleLowerCase())));
+        setFilteredValue(top.filter((food) => food.info.name.toLocaleLowerCase().includes(item.toLocaleLowerCase())));
         setItem("");
         console.log(top);
+        console.log("sjfhvlzkhglkjdshf;kasjdhglkhg;kas")
+        console.log(filteredValue);
     }
 
 
@@ -38,6 +40,7 @@ const Card = (props) => {
                 const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.95250&lng=75.71050&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING');
                 const response = await data.json();
                 setTop(response?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+                setFilteredValue(response?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
             }
             handleTop();
         }, [])
@@ -55,8 +58,8 @@ const Card = (props) => {
 
             <div className='card-box'>
                 {
-                    top ?
-                        top.map((value, i) => (
+                    filteredValue?
+                    filteredValue.map((value, i) => (
 
                             <div className='card' key={i}>
                                 <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + value.info.cloudinaryImageId}></img>
@@ -68,7 +71,7 @@ const Card = (props) => {
                                 </div>
 
                             </div>
-                        )) : <p>No such Restaurant found</p>
+                        )):<p>hello....every one </p>
                 }
             </div>
         </>
