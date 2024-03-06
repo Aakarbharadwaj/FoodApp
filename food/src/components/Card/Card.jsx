@@ -16,6 +16,7 @@ const Card = (props) => {
     const [top, setTop] = useState([])
     const [item, setItem] = useState("");
     const [filteredValue, setFilteredValue] = useState([]);
+    const [ratings, setRatings] = useState()
 
     const clicked = () => (
         setFilteredValue(top.filter((item) => item.info.avgRatingString > 4.3)))
@@ -58,8 +59,8 @@ const Card = (props) => {
 
             <div className='card-box'>
                 {
-                    filteredValue?
-                    filteredValue.map((value, i) => (
+                    filteredValue ?
+                        filteredValue.map((value, i) => (
 
                             <div className='card' key={i}>
                                 <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + value.info.cloudinaryImageId}></img>
@@ -71,7 +72,7 @@ const Card = (props) => {
                                 </div>
 
                             </div>
-                        )):<p>hello....every one </p>
+                        )) : <p>hello....every one </p>
                 }
             </div>
         </>
