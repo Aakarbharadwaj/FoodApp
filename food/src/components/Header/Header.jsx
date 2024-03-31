@@ -7,7 +7,7 @@ const Header = () => {
     }
     useEffect(() => {
         console.log("useEffect");
-    },[])
+    }, [])
     return (
         <div className='header'>
             <div className='nav-logo'>
